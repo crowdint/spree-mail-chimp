@@ -13,8 +13,10 @@ var modal_opts = { closeHTML : '<div>[x] CLOSE</div>',
     };
 
 <% if @errors.empty? %>
-    $('<div id="modal-notice"><h1><%= t("you_have_been_subscribed") %></h1></div>').modal(modal_opts);
+    $("#subscription-modal-notice").html(' <%= t("you_have_been_subscribed") %>').modal();
+
 <% else %>
-    $('<div id="modal-notice"><h1>ERROR:</h1> <%= @errors.join(' / ') %></div>').modal(modal_opts);
+  $("#subscription-modal-notice").html(' <%= @errors.join(' / ') %>').modal();
+
 <% end %>
 
