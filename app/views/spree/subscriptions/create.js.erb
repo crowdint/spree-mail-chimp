@@ -1,22 +1,10 @@
-<% flash[:notice] = nil %>
-
-var modal_opts = { closeHTML : '<div>[x] CLOSE</div>', 
-
-      containerCss : { height:80 },
-
-      onOpen: function (dialog) {
-                        dialog.overlay.fadeIn('fast', function() {
-                            dialog.data.show();
-                            dialog.container.fadeIn('fast');
-                        });
-              }
-    };
+var modal_opts = {   };
 
 <% if @errors.empty? %>
-    $("#subscription-modal-notice").html(' <%= t("you_have_been_subscribed") %>').modal();
+    $("#subscription-modal-notice").html(' <%= t("you_have_been_subscribed") %>').modal(modal_opts);
 
 <% else %>
-  $("#subscription-modal-notice").html(' <%= @errors.join(' / ') %>').modal();
+  $("#subscription-modal-notice").html(' <%= @errors.join(' / ') %>').modal(modal_opts);
 
 <% end %>
 
