@@ -28,7 +28,6 @@ module SpreeMailChimp
           end
         end
       end
-      binding.pry
       @errors
     end
 
