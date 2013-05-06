@@ -6,12 +6,12 @@ module SpreeMailChimp
     end
 
     def subscribe_email(email_to_subscribe)
-      @errors = []
+      subscribe_errors = []
 
       if email_to_subscribe.blank?
-        @errors << t('missing_email')
+        subscribe_errors << I18n.t('missing_email')
       elsif email_to_subscribe !~ /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i
-        @errors << t('invalid_email_address')
+        subscribe_errors << I18n.t('invalid_email_address')
       else
         begin
           @mc_member = hominid.list_member_info(Spree::Config.get(:mailchimp_list_id), [email_to_subscribe])
@@ -19,16 +19,16 @@ module SpreeMailChimp
         end
 
         if @mc_member['errors'] == 0
-          @errors << t('that_address_is_already_subscribed')
+          subscribe_errors << I18n.t('that_address_is_already_subscribed')
         else
           begin
             hominid.list_subscribe(Spree::Config.get(:mailchimp_list_id), email_to_subscribe, {})
           rescue
-            @errors << t('invalid_email_address')
+            subscribe_errors << I18n.t('invalid_email_address')
           end
         end
       end
-      @errors
+      subscribe_errors
     end
 
   end
