@@ -1,6 +1,8 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<h1><%= t('mailchimp_settings') %></h1>
+<% content_for :page_title do %>
+  <%= t(:mailchimp_settings) %>
+<% end %>
 
 <table>
   <tr>
@@ -8,9 +10,26 @@
     <td><%= Spree::Config[:mailchimp_api_key] %></td>
   </tr>
   <tr>
-    <th scope="row"><%= t("mailchimp_list_id") %>:</th>
+    <th scope="row"><%= t("mailchimp_general_list_id") %>:</th>
     <td><%= Spree::Config[:mailchimp_list_id] %></td>
   </tr>
+</table>
+<br/>
+<table>
+  <thead>
+    <tr>
+      <td><%= t("mailchimp_list_id") %></td>
+      <td><%= t("mailchimp_list_name") %></td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @lists.each do |list| %>
+    <tr>
+      <td><%= list['name'] %></td>
+      <td ><%= list['id'] %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 
 <h4><%= t("mailchimp_double_opt_in") %>: <%= Spree::Config[:mailchimp_double_opt_in]? t('yes') : t('no') %></h4>

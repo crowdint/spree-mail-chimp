@@ -1,7 +1,9 @@
 
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<h1><%= t('mailchimp_settings') %></h1>
+<% content_for :page_title do %>
+  <%= t(:mailchimp_settings) %>
+<% end %>
 
 <%= form_tag(admin_mail_chimp_settings_path, :method => :put, :id => :mail_chimp_settings_form) do %>
 
@@ -14,7 +16,7 @@
           <%= text_field_tag('preferences[mailchimp_api_key]', Spree::Config[:mailchimp_api_key], :size => 46, :maxlength => 256, :class => 'email') %>
         </p>
         <p>
-          <label><%= t('mailchimp_list_id') %></label><br />
+          <label><%= t('mailchimp_general_list_id') %></label><br />
           <%= text_field_tag('preferences[mailchimp_list_id]', Spree::Config[:mailchimp_list_id], :maxlength => 256, :class => 'email') %>
         </p>
       </fieldset>
