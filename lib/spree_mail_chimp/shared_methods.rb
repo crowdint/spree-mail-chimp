@@ -22,7 +22,7 @@ module SpreeMailChimp
           subscribe_errors << I18n.t('that_address_is_already_subscribed')
         else
           begin
-            hominid.list_subscribe(Spree::Config.get(:mailchimp_list_id), email_to_subscribe, {})
+            hominid.list_subscribe(Spree::Config.get(:mailchimp_list_id), email_to_subscribe, {}, 'html', *mailchimp_subscription_opts)
           rescue
             subscribe_errors << I18n.t('invalid_email_address')
           end
@@ -57,6 +57,10 @@ module SpreeMailChimp
         end
       end
       subscribe_errors
+    end
+
+    def mailchimp_subscription_opts
+      [Spree::Config.get(:mailchimp_double_opt_in), true, true, Spree::Config.get(:mailchimp_send_welcome)]
     end
 
   end
